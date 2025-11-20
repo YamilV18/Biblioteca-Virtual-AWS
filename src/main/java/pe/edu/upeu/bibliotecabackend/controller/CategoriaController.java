@@ -4,9 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upeu.bibliotecabackend.model.Categoria;
-import pe.edu.upeu.bibliotecabackend.model.Libro;
 import pe.edu.upeu.bibliotecabackend.service.CategoriaService;
-import pe.edu.upeu.bibliotecabackend.service.LibroService;
 
 import java.util.List;
 
@@ -15,20 +13,15 @@ import java.util.List;
 public class CategoriaController {
 
     private final CategoriaService categoriaService;
-    private final LibroService libroService;
 
-    public CategoriaController(CategoriaService categoriaService, LibroService libroService) {
+    public CategoriaController(CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
-        this.libroService = libroService;
     }
 
     // URL: /api/categorias
     @GetMapping
-    public List<Libro> obtenerLibros(@RequestParam(required = false) String q) {
-        if (q != null && !q.isEmpty()) {
-            return libroService.buscar(q);
-        }
-        return libroService.obtenerTodos();
+    public List<Categoria> obtenerTodas() {
+        return categoriaService.obtenerTodas();
     }
 
     // URL: /api/categorias/1
